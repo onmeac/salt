@@ -2746,12 +2746,15 @@ class State:
                         req_stats.add("fail")
                         continue
                 if r_state.startswith("onchanges"):
-                    if not run_dict[tag]["changes"]:
+                    if not run_dict[tag]["changes"] and not run_dict[tag].get("would_run"):
                         req_stats.add("onchanges")
                     else:
                         req_stats.add("onchangesmet")
                     continue
-                if r_state.startswith("watch") and run_dict[tag]["changes"]:
+                if r_state.startswith("watch") and (
+                    run_dict[tag]["changes"] or
+                    run_dict[tag].get("would_run")
+                ):
                     req_stats.add("change")
                     continue
                 if r_state.startswith("prereq") and run_dict[tag]["result"] is None:

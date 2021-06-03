@@ -848,6 +848,7 @@ def run(
     if __opts__["test"] and not test_name:
         ret["result"] = None
         ret["comment"] = 'Command "{}" would have been executed'.format(name)
+        ret['would_run'] = True
         return _reinterpreted_state(ret) if stateful else ret
 
     if cwd and not os.path.isdir(cwd):

@@ -1860,6 +1860,7 @@ def installed(
             "result": None,
             "comment": "\n".join(comment),
         }
+        ret['would_run'] = True
         if warnings:
             ret.setdefault("warnings", []).extend(warnings)
         return ret
